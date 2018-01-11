@@ -7,7 +7,9 @@ var server = http.createServer(app);
 app.get('/api/whoami', function(req, res) {
   console.log('whoami reached.');
   
-  res.end();
+  var request = { ipaddress: req.ip, language: req.headers["accept-language"], software: req.headers["user-agent"] };
+  
+  res.end(JSON.stringify(request));
 });
 
 app.use(express.static(path.resolve(__dirname, 'client')));
